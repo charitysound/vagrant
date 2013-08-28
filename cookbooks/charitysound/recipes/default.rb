@@ -69,12 +69,6 @@ mysql_database 'backend' do
 end
 
 # ----------------------------------- #
-# => Composer                         #
-# ----------------------------------- #
-
-include_recipe "chef-composer"
-
-# ----------------------------------- #
 # => Scripts                          #
 # ----------------------------------- #
 
@@ -83,4 +77,28 @@ template "/usr/local/bin/chweb" do
   owner "root"
   group "staff"
   mode "0755"
+end
+
+# ----------------------------------- #
+# => Composer                         #
+# ----------------------------------- #
+
+include_recipe "chef-composer"
+
+# ----------------------------------- #
+# => NPM                              #
+# ----------------------------------- #
+
+execute "npm install grunt" do
+  command "npm install -g grunt-cli"
+  action :run
+end
+
+# ----------------------------------- #
+# => RubyGems                         #
+# ----------------------------------- #
+
+execute "gem install compass" do
+  command "gem install compass"
+  action :run
 end
